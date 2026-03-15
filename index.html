@@ -1,0 +1,511 @@
+
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Michael's Endurance & Tennis Daily</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* Light Theme */
+            --bg-color: #F8FAFC;
+            --text-color: #1E293B;
+            --primary: #147D44; /* Tennis Green */
+            --secondary: #3B1D5F; /* Scoreboard Purple */
+            --highlight: #C5FF00; /* Fluorescent Lime */
+            --card-bg: #FFFFFF;
+            --border-color: #E2E8F0;
+            --shadow: 0 4px 12px rgba(20, 125, 68, 0.08);
+            --header-text: #1E293B;
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg-color: #0F172A;
+            --text-color: #FFFFFF;
+            --primary: #147D44;
+            --secondary: #3B1D5F;
+            --highlight: #C5FF00;
+            --card-bg: rgba(20, 125, 68, 0.12);
+            --border-color: rgba(20, 125, 68, 0.4);
+            --shadow: 0 8px 32px rgba(59, 29, 95, 0.3);
+            --header-text: #FFFFFF;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.7;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 6rem 2rem;
+            text-align: center;
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(197, 255, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-date {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--highlight);
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Container & Grid */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .category-header {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(20, 125, 68, 0.3);
+            border-color: var(--primary);
+        }
+
+        .card-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--header-text);
+            line-height: 1.4;
+        }
+
+        .card-body {
+            font-size: 17px;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        /* Expand/Collapse */
+        .story-content {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .story-content.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .toggle-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 0;
+            display: inline-flex;
+            align-items: center;
+            transition: color 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .toggle-btn:hover {
+            color: var(--highlight);
+        }
+
+        .toggle-btn::after {
+            content: '↓';
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+
+        .toggle-btn.active::after {
+            transform: rotate(180deg);
+        }
+
+        /* Highlight & Links */
+        .highlight {
+            background-color: var(--highlight);
+            color: #0F172A; /* Always dark text for lime bg */
+            padding: 0.1em 0.4em;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .citation {
+            display: inline-flex;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--primary);
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            color: var(--primary);
+            transition: all 0.3s ease;
+            word-break: break-all;
+            background: transparent;
+        }
+
+        .citation:hover {
+            background: var(--primary);
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(20, 125, 68, 0.4);
+        }
+
+        /* Dashboard & Insights */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 4rem;
+        }
+
+        .metric-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .metric-value {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        [data-theme="dark"] .metric-value {
+            color: var(--highlight);
+        }
+
+        .metric-label {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--primary);
+        }
+
+        .insight-card {
+            background: linear-gradient(to bottom right, var(--card-bg), rgba(59, 29, 95, 0.1));
+            border-left: 4px solid var(--primary);
+            padding: 3rem;
+        }
+
+        .insight-content {
+            font-size: 18px;
+            line-height: 1.8;
+            font-style: italic;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: 2px solid var(--primary);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(15deg);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 14px;
+            opacity: 0.7;
+            margin-top: 4rem;
+        }
+
+    </style>
+
+
+
+    <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()" aria-label="Toggle Theme">
+        ☀️
+    </button>
+
+    <header class="hero">
+        <div class="hero-date">2026年3月14日</div>
+        <h1 class="hero-title">🏃 Michael's Endurance & Tennis Daily</h1>
+        <div class="hero-subtitle">8条真实更新</div>
+    </header>
+
+    <div class="container">
+        <!-- Category 1: Endurance -->
+        <h2 class="category-header">🏃 耐力巅峰</h2>
+        <div class="grid">
+            
+            <!-- Story 1.1 -->
+            <article class="card">
+                <h3 class="card-title">IRONMAN 70.3 达拉斯首秀：Lionel Sanders 开启 2026 赛季</h3>
+                <div class="card-body">
+                    加拿大铁三名将 Lionel Sanders 于 3 月 15 日在德克萨斯州的 IRONMAN 70.3 Dallas-Little Elm 揭开 <span class="highlight">2026 赛季序幕</span>。作为该赛事的首届比赛，Sanders 完成了扎实的训练周期后重返赛场。
+                    <div id="content-endurance-1" class="story-content">
+                        与多位中距离铁三精英同场竞技。这场新增赛事不仅具有竞技价值，更承载着成为首位冠军的象征意义。
+                        <br><br>
+                        <a href="https://en.triatlonnoticias.com/actualidad-2/lionel-sanders-ironman-70-3-dallas-2026/" target="_blank" rel="noopener noreferrer" class="citation">来源: triatlonnoticias.com ↗</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="toggle-btn" id="btn-endurance-1" onclick="toggleStory('endurance-1')">展开阅读</button>
+                </div>
+            </article>
+
+            <!-- Story 1.2 -->
+            <article class="card">
+                <h3 class="card-title">Magnus Ditlev 的科纳战略：工程师式的完美追求</h3>
+                <div class="card-body">
+                    丹麦铁三明星 Magnus Ditlev 在最新采访中详细阐述了他的 2026 赛季规划——一切围绕科纳世锦赛展开。这位 28 岁的化学工程师出身选手，正以科学严谨的态度追逐最高荣誉。
+                    <div id="content-endurance-2" class="story-content">
+                        Ditlev 的备战策略体现了<span class="highlight">边际效益思维</span>：他将游泳训练里程大幅提升，目标是与第一集团同时出水；在新墨西哥进行高原训练，叠加热适应刺激；放弃尼斯 70.3 世锦赛以保留体能峰值。他的 2026 赛历极简——德州、法兰克福和科纳，外加哥本哈根附近的 1-2 场 70.3 热身赛。
+                        <br><br>
+                        "我不会再因为别人的配速而打乱自己的节奏，"Ditlev 反思 2024 年科纳时说，"当时我为了跟住 Sam Laidlow，前半程骑出了 70.3 的功率，这在夏威夷的高温下是致命的。" 这种自我校准能力，正是顶尖运动员从失败中提炼智慧的典范。
+                        <br><br>
+                        <a href="https://triathlonmagazine.ca/feature/an-interview-with-magnus-ditlev-inside-his-2026-master-plan/" target="_blank" rel="noopener noreferrer" class="citation">来源: triathlonmagazine.ca ↗</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="toggle-btn" id="btn-endurance-2" onclick="toggleStory('endurance-2')">展开阅读</button>
+                </div>
+            </article>
+
+            <!-- Story 1.3 -->
+            <article class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title">HYROX 全球扩张：功能性健身的社群革命</h3>
+                <div class="card-body">
+                    HYROX 在北美市场宣布 2026 秋季赛季扩展至 11 站，新增丹佛、纳什维尔和坦帕等城市。华盛顿特区站调整至劳动节周末，部分赛事延长至 4-5 天以容纳不断增长的参赛人数。
+                    <div id="content-endurance-3" class="story-content">
+                        这一扩张反映了功能性健身从小众走向主流的趋势——HYROX 不再只是精英运动员的竞技场，而是<span class="highlight">"业余精英"文化</span>的聚集地。曼谷站（3 月 20-22 日）和新加坡站的火爆报名印证了亚洲市场的崛起。曼谷邮报的专栏文章指出，这项赛事吸引的是那些愿意为"个人满意度和高 Whoop 应变分数"付费的城市人群——他们将时间和资源投入到娱乐性激情中，代表着后疫情时代健康意识的觉醒。
+                        <br><br>
+                        <a href="https://nationaltoday.com/us/il/nashville-il/news/2026/03/12/hyrox-expands-north-america-footprint-for-fall-2026-season/" target="_blank" rel="noopener noreferrer" class="citation">来源 1: nationaltoday.com ↗</a>
+                        <a href="https://www.bangkokpost.com/life/social-and-lifestyle/3216574/comforts-of-a-hyrox-race-in-a-chaotic-world" target="_blank" rel="noopener noreferrer" class="citation" style="margin-left: 10px;">来源 2: bangkokpost.com ↗</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="toggle-btn" id="btn-endurance-3" onclick="toggleStory('endurance-3')">展开阅读</button>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Category 2: Tennis -->
+        <h2 class="category-header">🎾 赛场快讯</h2>
+        <div class="grid">
+            
+            <!-- Story 2.1 -->
+            <article class="card">
+                <h3 class="card-title">印第安维尔斯女单四强：Svitolina 终结 Swiatek 卫冕之路</h3>
+                <div class="card-body">
+                    乌克兰老将 Elina Svitolina 在印第安维尔斯 1/4 决赛中以 6-2, 4-6, 6-4 击败世界第二 Iga Swiatek，时隔 7 年重返该赛事四强。这是 Svitolina 对阵波兰名将的第二次胜利。
+                    <div id="content-tennis-1" class="story-content">
+                        这也是她 2026 赛季的第 19 场胜利，领跑 WTA 巡回赛。这场比赛的战术博弈堪称教科书：Svitolina 在首盘利用 Swiatek 二发不稳连破三局；决胜盘第九局抓住关键破发点，零失误保发锁定胜局。值得注意的是，Svitolina 本赛季<span class="highlight">三盘大战保持 6 胜 0 负</span>。半决赛中，Svitolina 将对阵 Elena Rybakina。后者以 6-1, 7-6(4) 终结了 Jessica Pegula 连续七次打进该赛事四强的纪录。
+                        <br><br>
+                        <a href="https://www.wtatennis.com/news/4467988/svitolina-stands-tall-late-earns-rare-win-over-swiatek-to-reach-indian-wells-semifinals" target="_blank" rel="noopener noreferrer" class="citation">来源: wtatennis.com ↗</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="toggle-btn" id="btn-tennis-1" onclick="toggleStory('tennis-1')">展开阅读</button>
+                </div>
+            </article>
+
+            <!-- Story 2.2 -->
+            <article class="card">
+                <h3 class="card-title">决赛预告：Sabalenka vs Rybakina——2026 赛季的黄金对决</h3>
+                <div class="card-body">
+                    印第安维尔斯女单决赛将上演 Aryna Sabalenka 对阵 Elena Rybakina 的巅峰对话，这是两人本赛季<span class="highlight">第五次</span>在大满贯或 WTA 1000 级别决赛相遇。
+                    <div id="content-tennis-2" class="story-content">
+                        Rybakina 在今年澳网决赛中以 6-4, 4-6, 6-4 击败 Sabalenka 夺冠，并在 2023 年同样在印第安维尔斯捧杯。Sabalenka 连续第二年打进印第安维尔斯决赛，她在半决赛中击败捷克新星 Linda Noskova 晋级。两位选手都在深夜完成半决赛，决赛定于当地时间上午 11 点开打，快速恢复能力将成为制胜关键。
+                        <br><br>
+                        <a href="https://www.tennismajors.com/wta-tour-news/rybakina-and-sabalenka-prepare-for-high-stakes-indian-wells-final-in-australian-open-rematch-846540.html" target="_blank" rel="noopener noreferrer" class="citation">来源: tennismajors.com ↗</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="toggle-btn" id="btn-tennis-2" onclick="toggleStory('tennis-2')">展开阅读</button>
+                </div>
+            </article>
+
+            <!-- Story 2.3 -->
+            <article class="card" style="grid-column: 1 / -1;">
+                <h3 class="card-title">WTA 伤病危机：赛程密度引发行业反思</h3>
+                <div class="card-body">
+                    迪拜 WTA 1000 赛事期间，24 名球员退赛或中途退赛，其中包括世界前二 Sabalenka 和 Swiatek。世界第四 Coco Gauff 在印第安维尔斯对阵 Alexandra Eala 时因伤退赛。
+                    <div id="content-tennis-3" class="story-content">
+                        这是 Gauff 职业生涯第二次无法完成比赛。学术研究显示，近 50 年 WTA 数据表明弃权率呈持续上升趋势，部分原因是现代比赛的技术和体能要求达到了女性运动员身体承受的极限。赛程密度、快速加速、强力击球和频繁变向的叠加，正在考验着人体生理的边界。这一现象提出了一个严肃问题：<span class="highlight">2026 年的 WTA 巡回赛是否已经超出了可持续的强度阈值？</span>
+                        <br><br>
+                        <a href="https://lastwordonsports.com/tennis/2026/03/13/wta-tour-too-much/" target="_blank" rel="noopener noreferrer" class="citation">来源: lastwordonsports.com ↗</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="toggle-btn" id="btn-tennis-3" onclick="toggleStory('tennis-3')">展开阅读</button>
+                </div>
+            </article>
+        </div>
+
+        <!-- Dashboard -->
+        <h2 class="category-header">📊 数据看板</h2>
+        <div class="dashboard-grid">
+            <div class="metric-card">
+                <div class="metric-value">4</div>
+                <div class="metric-label">耐力运动动态</div>
+                <div style="font-size: 12px; margin-top: 10px; opacity: 0.7;">IRONMAN (2), HYROX (2)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">4</div>
+                <div class="metric-label">网球动态</div>
+                <div style="font-size: 12px; margin-top: 10px; opacity: 0.7;">印第安维尔斯 (3), 行业分析 (1)</div>
+            </div>
+            <div class="metric-card">
+                <div class="metric-value">100%</div>
+                <div class="metric-label">时效验证</div>
+                <div style="font-size: 12px; margin-top: 10px; opacity: 0.7;">2026.03.13 - 03.14 发布</div>
+            </div>
+        </div>
+
+        <!-- Expert Insight -->
+        <h2 class="category-header">💡 Michael 的深度视角</h2>
+        <div class="card insight-card">
+            <div class="insight-content">
+                <p>今日赛场呈现出两种截然不同的竞技哲学。在耐力运动领域，Magnus Ditlev 的科纳战略展现了<span class="highlight">"减法思维"</span>的力量——他放弃尼斯 70.3 世锦赛、拒绝卫冕 Challenge Roth，将全年能量聚焦于单一目标。这种取舍背后是对自身生理极限的精准认知：他从 2024 年科纳的配速失误中学到，盲目跟随他人节奏会透支后程储备。这种自我校准能力，正是顶尖运动员将失败转化为智慧的关键。</p>
+                <br>
+                <p>网球赛场则暴露出<span class="highlight">"加法困境"</span>: WTA 的伤病潮不是偶然，而是系统性问题的症状。当迪拜站 24 人退赛、Gauff 职业生涯第二次无法完赛时，我们必须正视一个事实——现代女子网球的技术要求与 11 个月的赛程密度，已经逼近人体承受的生理天花板。</p>
+                <br>
+                <p>这两个案例共同指向一个洞察：<strong>真正的韧性不是无限堆叠强度，而是在理解边界后做出明智的资源分配。</strong>Ditlev 选择"战略性放弃"以保存峰值，WTA 则需要重新审视赛历设计——因为持续突破极限的代价，往往是系统性的崩溃。体育竞技的终极智慧，或许不在于"能承受多少"，而在于"懂得何时停下"。</p>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Michael's Endurance & Tennis Daily. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // State management (Memory only, as requested by sandbox constraints)
+        let isDarkMode = true; // Default based on requirements
+
+        // Theme Toggle Function
+        function toggleTheme() {
+            isDarkMode = !isDarkMode;
+            const theme = isDarkMode ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            
+            const btn = document.getElementById('theme-btn');
+            btn.textContent = isDarkMode ? '☀️' : '🌙';
+        }
+
+        // Expand/Collapse Function
+        function toggleStory(id) {
+            const content = document.getElementById(`content-${id}`);
+            const btn = document.getElementById(`btn-${id}`);
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                btn.classList.remove('active');
+                btn.textContent = '展开阅读';
+            } else {
+                content.classList.add('active');
+                btn.classList.add('active');
+                btn.textContent = '收起内容';
+            }
+        }
+    </script>
