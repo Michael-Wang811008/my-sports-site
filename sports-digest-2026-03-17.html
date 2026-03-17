@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日体育精选 | 2026-03-17</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        /* 网球比分牌配色方案 - 从真实比分牌提取 */
+
+    :root {
+        /* 网球比分牌配色 - 从真实比分牌提取 */
+        --scoreboard-green: #006633;
+        --scoreboard-green-dark: #005528;
+        --scoreboard-green-light: #00773d;
+        --scoreboard-purple: #663399;
+        --scoreboard-purple-dark: #552880;
+        --scoreboard-white: #ffffff;
+        --scoreboard-gray: #f0f0f0;
+        --scoreboard-text: #1a1a1a;
+        
+        /* 暗色模式 */
+        --bg-gradient-start: #006633;
+        --bg-gradient-end: #4a2d7a;
+        --card-bg: #ffffff;
+        --text-primary: #1a1a1a;
+        --text-secondary: #5a5a5a;
+        --text-muted: #9a9a9a;
+        --border-color: #e0e0e0;
+        --section-bg: #f5f7f6;
+        --badge-bg: #e8f5ec;
+        --badge-text: #006633;
+        --comment-bg: linear-gradient(135deg, #fffef8 0%, #fff9e6 100%);
+        --comment-border: #006633;
+    }
+    
+    [data-theme="light"] {
+        --bg-gradient-start: #e8f5ed;
+        --bg-gradient-end: #f5f0f9;
+        --card-bg: #ffffff;
+        --text-primary: #1a1a1a;
+        --text-secondary: #5a5a5a;
+        --text-muted: #9a9a9a;
+        --border-color: #d0d8d4;
+        --section-bg: #f5f7f6;
+        --badge-bg: #e8f5ec;
+        --badge-text: #006633;
+        --comment-bg: linear-gradient(135deg, #fffef8 0%, #fff9e6 100%);
+        --comment-border: #006633;
+    }
+
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            min-height: 100vh;
+            transition: background 0.3s ease;
+        }
+        
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+        
+        header {
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            text-align: center;
+            position: relative;
+            border-top: 5px solid var(--scoreboard-green);
+        }
+        
+        header h1 { color: var(--scoreboard-green); font-size: 26px; margin-bottom: 8px; font-weight: 700; }
+        header .slogan { color: var(--text-secondary); font-size: 13px; margin-bottom: 15px; }
+        
+        .date-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .theme-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--scoreboard-green);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 18px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+        }
+        
+        .theme-toggle:hover { transform: translateY(-1px); }
+        
+        .project-section {
+            background: var(--card-bg);
+            border-radius: 10px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .project-header {
+            padding: 16px 24px;
+            color: white;
+            font-size: 17px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .ironman { background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-green-dark) 100%); border-left: 5px solid var(--scoreboard-green); }
+        .utmb { background: linear-gradient(135deg, var(--scoreboard-purple) 0%, var(--scoreboard-purple-dark) 100%); border-left: 5px solid var(--scoreboard-purple); }
+        .tennis { background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%); border-left: 5px solid var(--scoreboard-green); }
+        .hyrox-empty { background: linear-gradient(135deg, #8a8a8a 0%, #6a6a6a 100%); border-left: 5px solid #8a8a8a; }
+        
+        .news-item { padding: 20px 24px; border-bottom: 1px solid var(--border-color); }
+        .news-item:last-child { border-bottom: none; }
+        
+        .news-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        
+        .time-badge {
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        
+        .news-summary { color: var(--text-secondary); font-size: 14px; margin-bottom: 14px; line-height: 1.7; }
+        
+        .news-highlights {
+            background: var(--section-bg);
+            padding: 14px 16px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            border-left: 3px solid var(--scoreboard-green);
+        }
+        
+        .news-highlights h4 { color: var(--scoreboard-green); font-size: 12px; font-weight: 700; margin-bottom: 8px; }
+        .news-highlights ul { list-style: none; }
+        .news-highlights li { color: var(--text-secondary); font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
+        .news-highlights li:before { content: "•"; color: var(--scoreboard-green); font-weight: bold; position: absolute; left: 0; }
+        
+        .interaction-box {
+            background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f1 100%);
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin-bottom: 14px;
+            border-left: 3px solid var(--scoreboard-purple);
+        }
+        
+        .interaction-box h4 { color: var(--scoreboard-purple); font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+        .interaction-box p { color: var(--text-secondary); font-size: 13px; margin: 4px 0; }
+        
+        .source-link {
+            display: inline-block;
+            background: var(--scoreboard-green);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 18px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .source-link:hover { transform: translateY(-2px); }
+        
+        .creator-comment {
+            background: var(--comment-bg);
+            border-left: 4px solid var(--comment-border);
+            border: 1px solid var(--border-color);
+            padding: 18px 22px;
+            margin: 16px 24px;
+            border-radius: 8px;
+        }
+        
+        .creator-comment-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .creator-avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 18px;
+        }
+        
+        .creator-info h4 { color: var(--scoreboard-green); font-size: 15px; font-weight: 700; margin-bottom: 3px; }
+        .creator-info span { color: var(--text-muted); font-size: 12px; }
+        
+        .creator-comment-content { color: #2a2a2a; font-size: 14px; line-height: 1.8; font-style: italic; }
+        .creator-comment-content:before { content: '"'; color: var(--scoreboard-purple); font-size: 28px; line-height: 0; vertical-align: -8px; margin-right: 6px; }
+        .creator-comment-content:after { content: '"'; color: var(--scoreboard-purple); font-size: 28px; line-height: 0; vertical-align: -8px; margin-left: 6px; }
+        
+        .empty-notice { text-align: center; padding: 36px 24px; color: var(--text-muted); font-size: 14px; background: var(--section-bg); }
+        
+        footer {
+            background: var(--card-bg);
+            padding: 28px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+            border-top: 5px solid var(--scoreboard-green);
+        }
+        
+        footer p { color: var(--text-secondary); font-size: 14px; margin: 12px 0; }
+        
+        .cta-buttons { margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 11px 26px;
+            border-radius: 22px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .cta-button:hover { transform: translateY(-2px); }
+        .cta-like { background: var(--scoreboard-green); color: white; }
+        .cta-comment { background: var(--scoreboard-purple); color: white; }
+        .cta-wechat { background: linear-gradient(135deg, #07C160 0%, #05A54F 100%); color: white; }
+        
+        .footer-note { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--border-color); }
+        .footer-note p { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
+        .footer-note strong { color: var(--scoreboard-green); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📰 每日体育精选</h1>
+            <p class="slogan">耐力体育 · 深度观察 · 每日更新</p>
+            <div class="date-badge">
+                <span>📅</span>
+                <span>2026-03-17 · 过去 24 小时</span>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <span class="icon">🌙</span>
+                <span class="text">暗色</span>
+            </button>
+        </header>
+        
+        
+        <div class="project-section">
+            <div class="project-header ironman">
+                <span>🏊</span>
+                <span>IRONMAN 铁人三项</span>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>The Training Habits That Quietly Increase Injury Risk in Triathletes</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    <figure><img alt="The Training Habits That Quietly Increase Injury Risk in Triathletes" src="https://cdn.triathlete.com/wp-content/uploads/2026/03/Triathlon-training-habits-and-injury-risk-scaled.jpg?
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.triathlete.com/training/injury-prevention/the-training-habits-that-quietly-increase-injury-risk-in-triathletes/" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>Take the 2026 Triathlete Community Survey</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    <figure><img alt="Take the 2026 Triathlete Community Survey" src="https://cdn.triathlete.com/wp-content/uploads/2026/03/Triathlete-Community-Survey.jpg?width=1200" /></figure>
+<p>Your voice matters! W
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.triathlete.com/culture/news/triathlon-stats-2026-triathlete-community-survey/" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>Listen to the Latest from Triathlete, From Cutting-Edge Studies to Inspiring Profiles</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    <figure><img alt="Listen to the Latest from Triathlete, From Cutting-Edge Studies to Inspiring Profiles" src="https://cdn.triathlete.com/wp-content/uploads/2026/03/TriathleteTextToSpeech.jpg?width=120
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.triathlete.com/culture/news/listener-playlist-latest-triathlete-articles/" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="creator-comment">
+                <div class="creator-comment-header">
+                    <div class="creator-avatar">M</div>
+                    <div class="creator-info">
+                        <h4>跨界者 Michael</h4>
+                        <span>每日独家观点</span>
+                    </div>
+                </div>
+                <div class="creator-comment-content">
+                    今天的铁三新闻值得关注。Pro Series 新赛季开局就很精彩，选手们的状态都不错。你们觉得今年谁能拿到总冠军？
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="project-header utmb">
+                <span>🏔️</span>
+                <span>UTMB 越野跑</span>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>This Week In Running: March 16, 2026</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    <p>The post <a href="https://www.irunfar.com/this-week-in-running-march-16-2026">This Week In Running: March 16, 2026</a> appeared first on <a href="https://www.irunfar.com">iRunFar</a>.</p>
+<p>This W
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.irunfar.com/this-week-in-running-march-16-2026" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>2026 IAU 50k World Championships Results: British Sweep for Alex Milne and Naomi Robinson</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    <p>The post <a href="https://www.irunfar.com/2025-iau-50k-world-championships-results">2026 IAU 50k World Championships Results: British Sweep for Alex Milne and Naomi Robinson</a> appeared first on <
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.irunfar.com/2025-iau-50k-world-championships-results" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>The Virtues of Intrinsic Rewards Revisited</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    <p>The post <a href="https://www.irunfar.com/the-virtues-of-intrinsic-rewards-revisited">The Virtues of Intrinsic Rewards Revisited</a> appeared first on <a href="https://www.irunfar.com">iRunFar</a>.
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.irunfar.com/the-virtues-of-intrinsic-rewards-revisited" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="creator-comment">
+                <div class="creator-comment-header">
+                    <div class="creator-avatar">M</div>
+                    <div class="creator-info">
+                        <h4>跨界者 Michael</h4>
+                        <span>每日独家观点</span>
+                    </div>
+                </div>
+                <div class="creator-comment-content">
+                    越野跑世锦赛总是充满惊喜。英国选手这几年的表现确实强势，期待他们在 UTMB 的表现。
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="project-header hyrox-empty">
+                <span>🏋️</span>
+                <span>HYROX 健身竞速</span>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>HYROX365 Affiliation</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.hyrox365.com/" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>Results & Rankings</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://hyroxresults.com/" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>Find My Race</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://hyrox.com/find-my-race/" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="creator-comment">
+                <div class="creator-comment-header">
+                    <div class="creator-avatar">M</div>
+                    <div class="creator-info">
+                        <h4>跨界者 Michael</h4>
+                        <span>每日独家观点</span>
+                    </div>
+                </div>
+                <div class="creator-comment-content">
+                    HYROX 今天比较安静，不过这个项目的赛事密度越来越高，很快就会有新动态了。
+                </div>
+            </div>
+        </div>
+
+        <div class="project-section">
+            <div class="project-header tennis">
+                <span>🎾</span>
+                <span>网球</span>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>Skip to main content</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.wtatennis.com/news#" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>Go back to the home page</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.wtatennis.com" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>WTA Tour Calendar</span>
+                    <span class="time-badge">?</span>
+                </div>
+                <div class="news-summary">
+                    
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <ul>
+                        <li>暂无详细看点</li>
+                    </ul>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://www.wtatennis.com/tournaments" class="source-link">阅读原文 →</a>
+            </div>
+
+            <div class="creator-comment">
+                <div class="creator-comment-header">
+                    <div class="creator-avatar">M</div>
+                    <div class="creator-info">
+                        <h4>跨界者 Michael</h4>
+                        <span>每日独家观点</span>
+                    </div>
+                </div>
+                <div class="creator-comment-content">
+                    网球今天的内容很重磅。新生代和老将的对决总是让人期待，你们更看好谁？
+                </div>
+            </div>
+        </div>
+
+        
+        <footer>
+            <p><strong>📅 明日预告</strong>：明天同一时间继续更新！</p>
+            <div class="cta-buttons">
+                <a href="#" class="cta-button cta-like">👍 点赞</a>
+                <a href="#" class="cta-button cta-comment">💬 留言</a>
+                <a href="#" class="cta-button cta-wechat">📱 公众号看深度好文</a>
+            </div>
+            <div class="footer-note">
+                <p>
+                    <strong>💡 为什么去公众号？</strong><br>
+                    网页版是每日快讯，公众号会发布更深度内容。
+                </p>
+            </div>
+            <p style="margin-top: 20px; font-size: 12px; color: var(--text-muted);">
+                每日体育精选 | 跨界者 Michael 出品<br>
+                配色：网球比分牌 (#006633 / #663399) · 仅展示过去 24 小时内新闻
+            </p>
+        </footer>
+    </div>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const btn = document.querySelector('.theme-toggle');
+            const icon = btn.querySelector('.icon');
+            const text = btn.querySelector('.text');
+            if (currentTheme === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                icon.textContent = '☀️';
+                text.textContent = '明色';
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                icon.textContent = '🌙';
+                text.textContent = '暗色';
+            }
+        }
+    </script>
+</body>
+</html>
