@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>每日体育精选 | 2026-03-20</title>
+    <style>
+
+    :root {
+        --scoreboard-green: #006633; --scoreboard-green-dark: #005528;
+        --scoreboard-purple: #663399; --scoreboard-purple-dark: #552880;
+        --bg-gradient-start: #006633; --bg-gradient-end: #4a2d7a;
+        --card-bg: #ffffff; --text-primary: #1a1a1a; --text-secondary: #5a5a5a;
+        --badge-bg: #e8f5ec; --badge-text: #006633;
+        --comment-bg: linear-gradient(135deg, #fffef8 0%, #fff9e6 100%);
+        --comment-border: #006633;
+        --youtube-red: #FF0000;
+    }
+    [data-theme="light"] {
+        --bg-gradient-start: #f0f4f0; --bg-gradient-end: #e8f0e8;
+    }
+    [data-theme="dark"] {
+        --bg-gradient-start: #006633; --bg-gradient-end: #4a2d7a;
+        --card-bg: #1e1e1e; --text-primary: #ffffff; --text-secondary: #b0b0b0;
+        --badge-bg: #1a3a1a;
+        --comment-bg: linear-gradient(135deg, #2a2a1a 0%, #3a3a2a 100%);
+    }
+    [data-theme="dark"] .news-highlights, [data-theme="dark"] .interaction-box { background: #2a2a2a; }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6; color: var(--text-primary);
+        background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+        min-height: 100vh;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    header {
+        background: var(--card-bg); padding: 28px; border-radius: 10px; margin-bottom: 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15); text-align: center;
+        border-top: 5px solid var(--scoreboard-green); position: relative;
+    }
+    header h1 { color: var(--scoreboard-green); font-size: 26px; margin-bottom: 8px; }
+    header .slogan { color: var(--text-secondary); font-size: 13px; margin-bottom: 15px; }
+    .date-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%);
+        color: white; padding: 6px 16px; border-radius: 16px; font-size: 13px; font-weight: 600;
+    }
+    .theme-toggle {
+        position: absolute; top: 15px; right: 15px;
+        background: var(--scoreboard-green); color: white;
+        border: none; padding: 8px 16px; border-radius: 18px; cursor: pointer; font-size: 13px;
+    }
+    .project-section {
+        background: var(--card-bg); border-radius: 10px; margin-bottom: 16px;
+        overflow: hidden; box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    .project-header {
+        padding: 16px 24px; color: white; font-size: 17px; font-weight: 700;
+    }
+    .ironman { background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-green-dark) 100%); }
+    .utmb { background: linear-gradient(135deg, var(--scoreboard-purple) 0%, var(--scoreboard-purple-dark) 100%); }
+    .tennis { background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%); }
+    .hyrox { background: linear-gradient(135deg, #666 0%, #444 100%); }
+    .hyrox-empty { background: linear-gradient(135deg, #8a8a8a 0%, #6a6a6a 100%); }
+    .news-item { padding: 20px 24px; border-bottom: 1px solid #e0e0e0; }
+    .news-item:last-child { border-bottom: none; }
+    .news-title {
+        font-size: 16px; font-weight: 700; margin-bottom: 10px;
+        display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    }
+    .time-badge {
+        background: var(--badge-bg); color: var(--badge-text);
+        padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 600;
+    }
+    .news-summary { color: var(--text-secondary); font-size: 14px; margin-bottom: 14px; line-height: 1.7; }
+    .news-highlights {
+        background: #f5f7f6; padding: 14px 16px; border-radius: 6px;
+        margin-bottom: 14px; border-left: 3px solid var(--scoreboard-green);
+    }
+    .news-highlights h4 { color: var(--scoreboard-green); font-size: 12px; margin-bottom: 8px; font-weight: 700; }
+    .interaction-box {
+        background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f1 100%);
+        padding: 12px 16px; border-radius: 6px; margin-bottom: 14px;
+        border-left: 3px solid var(--scoreboard-purple);
+    }
+    .interaction-box h4 { color: var(--scoreboard-purple); font-size: 12px; margin-bottom: 6px; font-weight: 700; }
+    .interaction-box p { color: var(--text-secondary); font-size: 13px; margin: 4px 0; }
+    .source-link {
+        display: inline-block; background: var(--scoreboard-green); color: white;
+        padding: 8px 18px; border-radius: 18px; text-decoration: none; font-size: 13px; font-weight: 600;
+        transition: all 0.2s;
+    }
+    .source-link:hover { transform: translateY(-2px); }
+    .creator-comment {
+        background: var(--comment-bg); border-left: 4px solid var(--comment-border);
+        border: 1px solid #e0e0e0; padding: 18px 22px; margin: 16px 24px; border-radius: 8px;
+    }
+    .creator-comment-header {
+        display: flex; align-items: center; gap: 12px;
+        margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0;
+    }
+    .creator-avatar {
+        width: 42px; height: 42px;
+        background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: white; font-weight: 700; font-size: 18px;
+    }
+    .creator-info h4 { color: var(--scoreboard-green); font-size: 15px; margin-bottom: 3px; font-weight: 700; }
+    .creator-info span { color: #9a9a9a; font-size: 12px; }
+    .creator-comment-content { color: #2a2a2a; font-size: 14px; line-height: 1.8; font-style: italic; }
+    footer {
+        background: var(--card-bg); padding: 28px; border-radius: 10px;
+        text-align: center; margin-top: 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    footer p { color: var(--text-secondary); font-size: 13px; margin: 12px 0; }
+    .footer-note { margin-top: 22px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 12px; color: #9a9a9a; }
+    
+    /* YouTube 视频特殊样式 */
+    .youtube-badge {
+        display: inline-flex; align-items: center; gap: 4px;
+        background: var(--youtube-red); color: white;
+        padding: 2px 8px; border-radius: 4px;
+        font-size: 11px; font-weight: 600;
+        margin-left: 8px;
+    }
+    .youtube-description {
+        background: #fff9e6; padding: 12px 16px; border-radius: 6px;
+        margin-bottom: 14px; border-left: 3px solid var(--youtube-red);
+        font-size: 13px; line-height: 1.6; color: var(--text-secondary);
+    }
+    .youtube-hint {
+        background: #f0f4f0; padding: 10px 14px; border-radius: 6px;
+        margin-bottom: 14px; font-size: 12px; color: #666;
+        display: flex; align-items: center; gap: 6px;
+    }
+    .youtube-hint svg { width: 16px; height: 16px; }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📰 每日体育精选</h1>
+            <p class="slogan">耐力体育 · 深度观察 · 每日更新</p>
+            <div class="date-badge">
+                <span>📅</span>
+                <span>2026-03-20</span>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()" style="cursor: pointer; border: none; outline: none;">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </header>
+        
+        
+        <div class="project-section">
+            <div class="project-header hyrox-empty">
+                <span>🏊</span>
+                <span>IRONMAN 铁人三项</span>
+            </div>
+            <div style="padding: 36px 24px; text-align: center; color: #9a9a9a; background: #f5f7f6;">
+                😴 过去 72 小时内没有重要新闻<br>有消息时会第一时间更新
+            </div>
+        </div>
+
+
+        <div class="project-section">
+            <div class="project-header hyrox-empty">
+                <span>🏔️</span>
+                <span>UTMB 越野跑</span>
+            </div>
+            <div style="padding: 36px 24px; text-align: center; color: #9a9a9a; background: #f5f7f6;">
+                😴 过去 72 小时内没有重要新闻<br>有消息时会第一时间更新
+            </div>
+        </div>
+
+
+        <div class="project-section">
+            <div class="project-header hyrox">
+                <span>🏋️</span>
+                <span>HYROX 健身竞速</span>
+            </div>
+
+
+            <div class="news-item">
+                <div class="news-title">
+                    <span>The WorldSeries ofFitness Racing</span>
+                    <span class="time-badge">21小时前</span>
+                </div>
+                <div class="news-summary">
+                    The WorldSeries ofFitness Racing
+                </div>
+                <div class="news-highlights">
+                    <h4>🔍 核心看点</h4>
+                    <div style="background: #f5f7f6; padding: 14px 16px; border-radius: 6px; border-left: 3px solid var(--scoreboard-green);">
+                        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin: 0;">
+                            新闻动态：The WorldSeries ofFitness Racing
+                        </p>
+                    </div>
+                </div>
+                <div class="interaction-box">
+                    <h4>💬 互动话题</h4>
+                    <p>• 你怎么看？</p>
+<p>• 欢迎评论区讨论</p>
+                </div>
+                <a href="https://hyrox.com/" class="source-link">阅读原文 →</a>
+            </div>
+
+
+            <div class="creator-comment">
+                <div class="creator-comment-header">
+                    <div class="creator-avatar">M</div>
+                    <div class="creator-info">
+                        <h4>跨界者 Michael</h4>
+                        <span>每日独家观点</span>
+                    </div>
+                </div>
+                <div class="creator-comment-content">
+                    🏋️ 健身观察
+
+"The WorldSeries ofFitness Racing"
+
+这条新闻说明健身竞速正在流行。
+
+HYROX 的成功在于它降低了"比赛"的门槛。你不需要是职业运动员，只要有一定的健身基础就能参赛。这让普通人也能体验当运动员的感觉。
+
+新闻里的内容，说明这个项目正在被更多人接受。这是好事，毕竟健身的终极目标不应该是"好看"，而是"好用"。
+
+我嘛，还在为能标准完成 10 个波比跳努力。等我练好了，说不定也能去体验一下 HYROX（先让我做完这 10 个再说）。
+
+—— 跨界者 Michael 🏋️
+                </div>
+            </div>
+        </div>
+
+
+        <div class="project-section">
+            <div class="project-header hyrox-empty">
+                <span>🎾</span>
+                <span>网球</span>
+            </div>
+            <div style="padding: 36px 24px; text-align: center; color: #9a9a9a; background: #f5f7f6;">
+                😴 过去 72 小时内没有重要新闻<br>有消息时会第一时间更新
+            </div>
+        </div>
+
+        
+        <footer>
+            <p><strong>📅 明日预告</strong>：明天同一时间继续更新！</p>
+            <div style="margin-top: 20px;">
+                <a href="#" style="display: inline-block; background: var(--scoreboard-green); color: white; padding: 11px 26px; border-radius: 22px; text-decoration: none; margin: 5px; font-weight: 600;">👍 点赞</a>
+                <a href="#" style="display: inline-block; background: var(--scoreboard-purple); color: white; padding: 11px 26px; border-radius: 22px; text-decoration: none; margin: 5px; font-weight: 600;">💬 留言</a>
+            </div>
+            <div class="footer-note">
+                每日体育精选 | 跨界者 Michael 出品<br>
+                翻译：googletrans 4.0.0-rc1 (Google Translate)<br>
+                配色：网球比分牌 (#006633 / #663399)<br>
+                YouTube 内容来自官方频道
+            </div>
+        </footer>
+    </div>
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const icon = document.getElementById('theme-icon');
+            const current = html.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            icon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+    </script>
+</body>
+</html>

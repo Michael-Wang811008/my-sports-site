@@ -1,34 +1,21 @@
 <!DOCTYPE html>
-<html lang="zh-CN" data-theme="dark">
+<html lang="zh-CN" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>每日体育精选 | 2026-03-17</title>
+    <title>每日体育精选 | 2026-03-19</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        /* 网球比分牌配色方案 - 从真实比分牌提取 */
 
     :root {
-        /* 网球比分牌配色 - 从真实比分牌提取 */
         --scoreboard-green: #006633;
         --scoreboard-green-dark: #005528;
-        --scoreboard-green-light: #00773d;
         --scoreboard-purple: #663399;
         --scoreboard-purple-dark: #552880;
-        --scoreboard-white: #ffffff;
-        --scoreboard-gray: #f0f0f0;
-        --scoreboard-text: #1a1a1a;
-        
-        /* 暗色模式 */
         --bg-gradient-start: #006633;
         --bg-gradient-end: #4a2d7a;
         --card-bg: #ffffff;
         --text-primary: #1a1a1a;
         --text-secondary: #5a5a5a;
-        --text-muted: #9a9a9a;
-        --border-color: #e0e0e0;
-        --section-bg: #f5f7f6;
         --badge-bg: #e8f5ec;
         --badge-text: #006633;
         --comment-bg: linear-gradient(135deg, #fffef8 0%, #fff9e6 100%);
@@ -36,238 +23,146 @@
     }
     
     [data-theme="light"] {
-        --bg-gradient-start: #e8f5ed;
-        --bg-gradient-end: #f5f0f9;
+        --bg-gradient-start: #f0f4f0;
+        --bg-gradient-end: #e8f0e8;
         --card-bg: #ffffff;
         --text-primary: #1a1a1a;
         --text-secondary: #5a5a5a;
-        --text-muted: #9a9a9a;
-        --border-color: #d0d8d4;
-        --section-bg: #f5f7f6;
-        --badge-bg: #e8f5ec;
-        --badge-text: #006633;
-        --comment-bg: linear-gradient(135deg, #fffef8 0%, #fff9e6 100%);
+    }
+    
+    [data-theme="dark"] {
+        --bg-gradient-start: #006633;
+        --bg-gradient-end: #4a2d7a;
+        --card-bg: #1e1e1e;
+        --text-primary: #ffffff;
+        --text-secondary: #b0b0b0;
+        --badge-bg: #1a3a1a;
+        --comment-bg: linear-gradient(135deg, #2a2a1a 0%, #3a3a2a 100%);
         --comment-border: #006633;
     }
+    
+    [data-theme="dark"] .news-highlights,
+    [data-theme="dark"] .interaction-box {
+        background: #2a2a2a;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        color: var(--text-primary);
+        background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+        min-height: 100vh;
+    }
+    .container { max-width: 800px; margin: 0 auto; padding: 20px; }
+    header {
+        background: var(--card-bg);
+        padding: 28px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+        text-align: center;
+        border-top: 5px solid var(--scoreboard-green);
+        position: relative;
+    }
+    header h1 { color: var(--scoreboard-green); font-size: 26px; margin-bottom: 8px; }
+    header .slogan { color: var(--text-secondary); font-size: 13px; margin-bottom: 15px; }
+    .date-badge {
+        display: inline-flex; align-items: center; gap: 6px;
+        background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%);
+        color: white; padding: 6px 16px; border-radius: 16px; font-size: 13px; font-weight: 600;
+    }
+    .theme-toggle {
+        position: absolute; top: 15px; right: 15px;
+        background: var(--scoreboard-green); color: white;
+        border: none; padding: 8px 16px; border-radius: 18px;
+        cursor: pointer; font-size: 13px;
+    }
+    .project-section {
+        background: var(--card-bg);
+        border-radius: 10px;
+        margin-bottom: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    }
+    .project-header {
+        padding: 16px 24px;
+        color: white;
+        font-size: 17px;
+        font-weight: 700;
+    }
+    .ironman { background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-green-dark) 100%); }
+    .utmb { background: linear-gradient(135deg, var(--scoreboard-purple) 0%, var(--scoreboard-purple-dark) 100%); }
+    .tennis { background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%); }
+    .hyrox { background: linear-gradient(135deg, #666 0%, #444 100%); }
+    .hyrox-empty { background: linear-gradient(135deg, #8a8a8a 0%, #6a6a6a 100%); }
+    .news-item { padding: 20px 24px; border-bottom: 1px solid #e0e0e0; }
+    .news-item:last-child { border-bottom: none; }
+    .news-title {
+        font-size: 16px; font-weight: 700; margin-bottom: 10px;
+        display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+    }
+    .time-badge {
+        background: var(--badge-bg); color: var(--badge-text);
+        padding: 3px 10px; border-radius: 10px; font-size: 11px; font-weight: 600;
+    }
+    .news-summary { color: var(--text-secondary); font-size: 14px; margin-bottom: 14px; line-height: 1.7; }
+    .news-highlights {
+        background: #f5f7f6; padding: 14px 16px; border-radius: 6px;
+        margin-bottom: 14px; border-left: 3px solid var(--scoreboard-green);
+    }
+    .news-highlights h4 { color: var(--scoreboard-green); font-size: 12px; margin-bottom: 8px; font-weight: 700; }
+    .news-highlights ul { list-style: none; }
+    .news-highlights li {
+        color: var(--text-secondary); font-size: 13px;
+        padding: 4px 0; padding-left: 16px; position: relative;
+    }
+    .news-highlights li:before {
+        content: "•"; color: var(--scoreboard-green);
+        font-weight: bold; position: absolute; left: 0;
+    }
+    .interaction-box {
+        background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f1 100%);
+        padding: 12px 16px; border-radius: 6px;
+        margin-bottom: 14px; border-left: 3px solid var(--scoreboard-purple);
+    }
+    .interaction-box h4 { color: var(--scoreboard-purple); font-size: 12px; margin-bottom: 6px; font-weight: 700; }
+    .interaction-box p { color: var(--text-secondary); font-size: 13px; margin: 4px 0; }
+    .source-link {
+        display: inline-block;
+        background: var(--scoreboard-green); color: white;
+        padding: 8px 18px; border-radius: 18px;
+        text-decoration: none; font-size: 13px; font-weight: 600;
+        transition: all 0.2s;
+    }
+    .source-link:hover { transform: translateY(-2px); }
+    .creator-comment {
+        background: var(--comment-bg);
+        border-left: 4px solid var(--comment-border);
+        border: 1px solid #e0e0e0;
+        padding: 18px 22px; margin: 16px 24px; border-radius: 8px;
+    }
+    .creator-comment-header {
+        display: flex; align-items: center; gap: 12px;
+        margin-bottom: 12px; padding-bottom: 10px; border-bottom: 1px solid #e0e0e0;
+    }
+    .creator-avatar {
+        width: 42px; height: 42px;
+        background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%);
+        border-radius: 50%;
+        display: flex; align-items: center; justify-content: center;
+        color: white; font-weight: 700; font-size: 18px;
+    }
+    .creator-info h4 { color: var(--scoreboard-green); font-size: 15px; margin-bottom: 3px; font-weight: 700; }
+    .creator-info span { color: #9a9a9a; font-size: 12px; }
+    .creator-comment-content { color: #2a2a2a; font-size: 14px; line-height: 1.8; font-style: italic; }
+    footer {
+        background: var(--card-bg); padding: 28px; border-radius: 10px;
+        text-align: center; margin-top: 20px;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    footer p { color: var(--text-secondary); font-size: 13px; margin: 12px 0; }
+    .footer-note { margin-top: 22px; padding-top: 20px; border-top: 1px solid #e0e0e0; font-size: 12px; color: #9a9a9a; }
 
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.6;
-            color: var(--text-primary);
-            background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-            min-height: 100vh;
-            transition: background 0.3s ease;
-        }
-        
-        .container { max-width: 800px; margin: 0 auto; padding: 20px; }
-        
-        header {
-            background: var(--card-bg);
-            padding: 28px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            text-align: center;
-            position: relative;
-            border-top: 5px solid var(--scoreboard-green);
-        }
-        
-        header h1 { color: var(--scoreboard-green); font-size: 26px; margin-bottom: 8px; font-weight: 700; }
-        header .slogan { color: var(--text-secondary); font-size: 13px; margin-bottom: 15px; }
-        
-        .date-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 16px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        
-        .theme-toggle {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--scoreboard-green);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 18px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: all 0.2s;
-        }
-        
-        .theme-toggle:hover { transform: translateY(-1px); }
-        
-        .project-section {
-            background: var(--card-bg);
-            border-radius: 10px;
-            margin-bottom: 16px;
-            overflow: hidden;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            border: 1px solid var(--border-color);
-        }
-        
-        .project-header {
-            padding: 16px 24px;
-            color: white;
-            font-size: 17px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .ironman { background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-green-dark) 100%); border-left: 5px solid var(--scoreboard-green); }
-        .utmb { background: linear-gradient(135deg, var(--scoreboard-purple) 0%, var(--scoreboard-purple-dark) 100%); border-left: 5px solid var(--scoreboard-purple); }
-        .tennis { background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%); border-left: 5px solid var(--scoreboard-green); }
-        .hyrox-empty { background: linear-gradient(135deg, #8a8a8a 0%, #6a6a6a 100%); border-left: 5px solid #8a8a8a; }
-        
-        .news-item { padding: 20px 24px; border-bottom: 1px solid var(--border-color); }
-        .news-item:last-child { border-bottom: none; }
-        
-        .news-title {
-            font-size: 16px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            gap: 12px;
-        }
-        
-        .time-badge {
-            background: var(--badge-bg);
-            color: var(--badge-text);
-            padding: 3px 10px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-            white-space: nowrap;
-        }
-        
-        .news-summary { color: var(--text-secondary); font-size: 14px; margin-bottom: 14px; line-height: 1.7; }
-        
-        .news-highlights {
-            background: var(--section-bg);
-            padding: 14px 16px;
-            border-radius: 6px;
-            margin-bottom: 14px;
-            border-left: 3px solid var(--scoreboard-green);
-        }
-        
-        .news-highlights h4 { color: var(--scoreboard-green); font-size: 12px; font-weight: 700; margin-bottom: 8px; }
-        .news-highlights ul { list-style: none; }
-        .news-highlights li { color: var(--text-secondary); font-size: 13px; padding: 4px 0; padding-left: 16px; position: relative; }
-        .news-highlights li:before { content: "•"; color: var(--scoreboard-green); font-weight: bold; position: absolute; left: 0; }
-        
-        .interaction-box {
-            background: linear-gradient(135deg, #f8f9fa 0%, #f0f2f1 100%);
-            padding: 12px 16px;
-            border-radius: 6px;
-            margin-bottom: 14px;
-            border-left: 3px solid var(--scoreboard-purple);
-        }
-        
-        .interaction-box h4 { color: var(--scoreboard-purple); font-size: 12px; font-weight: 700; margin-bottom: 6px; }
-        .interaction-box p { color: var(--text-secondary); font-size: 13px; margin: 4px 0; }
-        
-        .source-link {
-            display: inline-block;
-            background: var(--scoreboard-green);
-            color: white;
-            padding: 8px 18px;
-            border-radius: 18px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        .source-link:hover { transform: translateY(-2px); }
-        
-        .creator-comment {
-            background: var(--comment-bg);
-            border-left: 4px solid var(--comment-border);
-            border: 1px solid var(--border-color);
-            padding: 18px 22px;
-            margin: 16px 24px;
-            border-radius: 8px;
-        }
-        
-        .creator-comment-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid var(--border-color);
-        }
-        
-        .creator-avatar {
-            width: 42px;
-            height: 42px;
-            background: linear-gradient(135deg, var(--scoreboard-green) 0%, var(--scoreboard-purple) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 18px;
-        }
-        
-        .creator-info h4 { color: var(--scoreboard-green); font-size: 15px; font-weight: 700; margin-bottom: 3px; }
-        .creator-info span { color: var(--text-muted); font-size: 12px; }
-        
-        .creator-comment-content { color: #2a2a2a; font-size: 14px; line-height: 1.8; font-style: italic; }
-        .creator-comment-content:before { content: '"'; color: var(--scoreboard-purple); font-size: 28px; line-height: 0; vertical-align: -8px; margin-right: 6px; }
-        .creator-comment-content:after { content: '"'; color: var(--scoreboard-purple); font-size: 28px; line-height: 0; vertical-align: -8px; margin-left: 6px; }
-        
-        .empty-notice { text-align: center; padding: 36px 24px; color: var(--text-muted); font-size: 14px; background: var(--section-bg); }
-        
-        footer {
-            background: var(--card-bg);
-            padding: 28px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-            border-top: 5px solid var(--scoreboard-green);
-        }
-        
-        footer p { color: var(--text-secondary); font-size: 14px; margin: 12px 0; }
-        
-        .cta-buttons { margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
-        
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 11px 26px;
-            border-radius: 22px;
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
-        
-        .cta-button:hover { transform: translateY(-2px); }
-        .cta-like { background: var(--scoreboard-green); color: white; }
-        .cta-comment { background: var(--scoreboard-purple); color: white; }
-        .cta-wechat { background: linear-gradient(135deg, #07C160 0%, #05A54F 100%); color: white; }
-        
-        .footer-note { margin-top: 22px; padding-top: 20px; border-top: 1px solid var(--border-color); }
-        .footer-note p { font-size: 13px; color: var(--text-secondary); line-height: 1.8; }
-        .footer-note strong { color: var(--scoreboard-green); }
     </style>
 </head>
 <body>
@@ -277,11 +172,10 @@
             <p class="slogan">耐力体育 · 深度观察 · 每日更新</p>
             <div class="date-badge">
                 <span>📅</span>
-                <span>2026-03-17 · 过去 24 小时</span>
+                <span>2026-03-19</span>
             </div>
-            <button class="theme-toggle" onclick="toggleTheme()">
-                <span class="icon">🌙</span>
-                <span class="text">暗色</span>
+            <button class="theme-toggle" onclick="toggleTheme()" style="cursor: pointer; border: none; outline: none;">
+                <span id="theme-icon">🌙</span>
             </button>
         </header>
         
@@ -292,69 +186,31 @@
                 <span>IRONMAN 铁人三项</span>
             </div>
 
-            <div class="news-item">
-                <div class="news-title">
-                    <span>The Training Habits That Quietly Increase Injury Risk in Triathletes</span>
-                    <span class="time-badge">?</span>
-                </div>
-                <div class="news-summary">
-                    <figure><img alt="The Training Habits That Quietly Increase Injury Risk in Triathletes" src="https://cdn.triathlete.com/wp-content/uploads/2026/03/Triathlon-training-habits-and-injury-risk-scaled.jpg?
-                </div>
-                <div class="news-highlights">
-                    <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
-                </div>
-                <div class="interaction-box">
-                    <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
-                </div>
-                <a href="https://www.triathlete.com/training/injury-prevention/the-training-habits-that-quietly-increase-injury-risk-in-triathletes/" class="source-link">阅读原文 →</a>
-            </div>
 
             <div class="news-item">
                 <div class="news-title">
-                    <span>Take the 2026 Triathlete Community Survey</span>
-                    <span class="time-badge">?</span>
+                    <span>📖 在T100黄金海岸预览PTO的赛季开球：好消息和坏消息</span>
+                    <span class="time-badge">11小时前</span>
                 </div>
                 <div class="news-summary">
-                    <figure><img alt="Take the 2026 Triathlete Community Survey" src="https://cdn.triathlete.com/wp-content/uploads/2026/03/Triathlete-Community-Survey.jpg?width=1200" /></figure>
-<p>Your voice matters! W
+                    我们预览了本周末在澳大利亚举行的T100铁人三项世界巡回赛的开幕式。在T100黄金海岸预览PTO赛季开球的帖子：好消息和坏消息首次出现在Slowtwitch News上。
                 </div>
                 <div class="news-highlights">
                     <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
+                    <div style="background: #f5f7f6; padding: 14px 16px; border-radius: 6px; border-left: 3px solid var(--scoreboard-green);">
+                        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin: 0;">
+                            装备评测：我们预览了本周末在澳大利亚举行的T100铁人三项世界巡回赛的开幕式。在T100黄金海岸预览PTO赛季开球的帖子：好消息和坏消息首次出现在Slowtwitch News上。
+                        </p>
+                    </div>
                 </div>
                 <div class="interaction-box">
                     <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
+                    <p>• 你怎么看？</p>
+<p>• 欢迎评论区讨论</p>
                 </div>
-                <a href="https://www.triathlete.com/culture/news/triathlon-stats-2026-triathlete-community-survey/" class="source-link">阅读原文 →</a>
+                <a href="https://www.slowtwitch.com/triathlon/previewing-the-ptos-season-kickoff-at-t100-gold-coast-good-news-and-bad-news/" class="source-link">阅读原文 →</a>
             </div>
 
-            <div class="news-item">
-                <div class="news-title">
-                    <span>Listen to the Latest from Triathlete, From Cutting-Edge Studies to Inspiring Profiles</span>
-                    <span class="time-badge">?</span>
-                </div>
-                <div class="news-summary">
-                    <figure><img alt="Listen to the Latest from Triathlete, From Cutting-Edge Studies to Inspiring Profiles" src="https://cdn.triathlete.com/wp-content/uploads/2026/03/TriathleteTextToSpeech.jpg?width=120
-                </div>
-                <div class="news-highlights">
-                    <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
-                </div>
-                <div class="interaction-box">
-                    <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
-                </div>
-                <a href="https://www.triathlete.com/culture/news/listener-playlist-latest-triathlete-articles/" class="source-link">阅读原文 →</a>
-            </div>
 
             <div class="creator-comment">
                 <div class="creator-comment-header">
@@ -365,10 +221,23 @@
                     </div>
                 </div>
                 <div class="creator-comment-content">
-                    今天的铁三新闻值得关注。Pro Series 新赛季开局就很精彩，选手们的状态都不错。你们觉得今年谁能拿到总冠军？
+                    🏊‍♂️ 铁三新闻来了！
+
+看到"在T100黄金海岸预览PTO的赛季开球：好消息和坏消息"这条消息，我第一反应是：这届选手真不容易。
+
+想想当年 Mark Allen 和 Dave Scott 的"铁人之战"，那是真的在用生命比赛。现在的选手虽然装备更好、训练更科学，但 Kona 的大风可不会因此温柔半分。
+
+说个冷知识：1982 年 Julie Moss 爬过终点线的那一幕，让铁三从无人问津变成全球现象。所以啊，有时候"爬"也能爬出个未来。
+
+我个人觉得这条新闻说明铁三运动正在多元化发展。不管是成绩导向还是体验导向，能站上起跑线就是胜利。
+
+好了，我要去泳池了（虽然我只是去泡澡）。
+
+—— 跨界者 Michael 🏊‍♂️🚴‍♂️🏃‍♂️
                 </div>
             </div>
         </div>
+
 
         <div class="project-section">
             <div class="project-header utmb">
@@ -376,69 +245,31 @@
                 <span>UTMB 越野跑</span>
             </div>
 
-            <div class="news-item">
-                <div class="news-title">
-                    <span>This Week In Running: March 16, 2026</span>
-                    <span class="time-badge">?</span>
-                </div>
-                <div class="news-summary">
-                    <p>The post <a href="https://www.irunfar.com/this-week-in-running-march-16-2026">This Week In Running: March 16, 2026</a> appeared first on <a href="https://www.irunfar.com">iRunFar</a>.</p>
-<p>This W
-                </div>
-                <div class="news-highlights">
-                    <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
-                </div>
-                <div class="interaction-box">
-                    <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
-                </div>
-                <a href="https://www.irunfar.com/this-week-in-running-march-16-2026" class="source-link">阅读原文 →</a>
-            </div>
 
             <div class="news-item">
                 <div class="news-title">
-                    <span>2026 IAU 50k World Championships Results: British Sweep for Alex Milne and Naomi Robinson</span>
-                    <span class="time-badge">?</span>
+                    <span>📖 骄傲忘记了什么</span>
+                    <span class="time-badge">21小时前</span>
                 </div>
                 <div class="news-summary">
-                    <p>The post <a href="https://www.irunfar.com/2025-iau-50k-world-championships-results">2026 IAU 50k World Championships Results: British Sweep for Alex Milne and Naomi Robinson</a> appeared first on <
+                    “What Pride Forgets”一文首次出现在iRunFar上。Sabrina Little审视了跑步和生活中自豪感的陷阱。Sabrina Little的《What Pride Forgets》。
                 </div>
                 <div class="news-highlights">
                     <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
+                    <div style="background: #f5f7f6; padding: 14px 16px; border-radius: 6px; border-left: 3px solid var(--scoreboard-green);">
+                        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin: 0;">
+                            新闻动态：“What Pride Forgets”一文首次出现在iRunFar上。Sabrina Little审视了跑步和生活中自豪感的陷阱。Sabrina Little的《What Pride Forgets...
+                        </p>
+                    </div>
                 </div>
                 <div class="interaction-box">
                     <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
+                    <p>• 你怎么看？</p>
+<p>• 欢迎评论区讨论</p>
                 </div>
-                <a href="https://www.irunfar.com/2025-iau-50k-world-championships-results" class="source-link">阅读原文 →</a>
+                <a href="https://www.irunfar.com/what-pride-forgets" class="source-link">阅读原文 →</a>
             </div>
 
-            <div class="news-item">
-                <div class="news-title">
-                    <span>The Virtues of Intrinsic Rewards Revisited</span>
-                    <span class="time-badge">?</span>
-                </div>
-                <div class="news-summary">
-                    <p>The post <a href="https://www.irunfar.com/the-virtues-of-intrinsic-rewards-revisited">The Virtues of Intrinsic Rewards Revisited</a> appeared first on <a href="https://www.irunfar.com">iRunFar</a>.
-                </div>
-                <div class="news-highlights">
-                    <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
-                </div>
-                <div class="interaction-box">
-                    <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
-                </div>
-                <a href="https://www.irunfar.com/the-virtues-of-intrinsic-rewards-revisited" class="source-link">阅读原文 →</a>
-            </div>
 
             <div class="creator-comment">
                 <div class="creator-comment-header">
@@ -449,79 +280,55 @@
                     </div>
                 </div>
                 <div class="creator-comment-content">
-                    越野跑世锦赛总是充满惊喜。英国选手这几年的表现确实强势，期待他们在 UTMB 的表现。
+                    ⛰️ 山野评论
+
+ "骄傲忘记了什么"
+
+勃朗峰转一圈，46 小时不睡觉。我 46 分钟不睡觉都难，但这些选手做到了。
+
+这条新闻让我想到：越野跑的魅力不在于征服自然，而在于与自然共处。你能在凌晨 2 点的阿尔卑斯山狂奔，还能欣赏星空，这种体验是独一无二的。
+
+期待看到更多中国选手在 UTMB 的舞台上发光！
+
+（说完了，我要去爬山了——小区后面那座小山坡也算山吧？）
+
+—— 跨界者 Michael
                 </div>
             </div>
         </div>
 
+
         <div class="project-section">
-            <div class="project-header hyrox-empty">
+            <div class="project-header hyrox">
                 <span>🏋️</span>
                 <span>HYROX 健身竞速</span>
             </div>
 
-            <div class="news-item">
-                <div class="news-title">
-                    <span>HYROX365 Affiliation</span>
-                    <span class="time-badge">?</span>
-                </div>
-                <div class="news-summary">
-                    
-                </div>
-                <div class="news-highlights">
-                    <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
-                </div>
-                <div class="interaction-box">
-                    <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
-                </div>
-                <a href="https://www.hyrox365.com/" class="source-link">阅读原文 →</a>
-            </div>
 
             <div class="news-item">
                 <div class="news-title">
-                    <span>Results & Rankings</span>
-                    <span class="time-badge">?</span>
+                    <span>健身赛车世界系列</span>
+                    <span class="time-badge">0小时前</span>
                 </div>
                 <div class="news-summary">
-                    
+                    健身赛车世界系列
                 </div>
                 <div class="news-highlights">
                     <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
+                    <div style="background: #f5f7f6; padding: 14px 16px; border-radius: 6px; border-left: 3px solid var(--scoreboard-green);">
+                        <p style="color: var(--text-secondary); font-size: 14px; line-height: 1.7; margin: 0;">
+                            新闻动态：健身赛车世界系列
+                        </p>
+                    </div>
                 </div>
                 <div class="interaction-box">
                     <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
+                    <p>• 你怎么看？</p>
+<p>• 欢迎评论区讨论</p>
                 </div>
-                <a href="https://hyroxresults.com/" class="source-link">阅读原文 →</a>
+                <a href="https://hyrox.com/" class="source-link">阅读原文 →</a>
             </div>
 
-            <div class="news-item">
-                <div class="news-title">
-                    <span>Find My Race</span>
-                    <span class="time-badge">?</span>
-                </div>
-                <div class="news-summary">
-                    
-                </div>
-                <div class="news-highlights">
-                    <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
-                </div>
-                <div class="interaction-box">
-                    <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
-                </div>
-                <a href="https://hyrox.com/find-my-race/" class="source-link">阅读原文 →</a>
-            </div>
 
             <div class="creator-comment">
                 <div class="creator-comment-header">
@@ -532,130 +339,58 @@
                     </div>
                 </div>
                 <div class="creator-comment-content">
-                    HYROX 今天比较安静，不过这个项目的赛事密度越来越高，很快就会有新动态了。
+                    💪 HYROX 来了！
+
+"健身赛车世界系列"
+
+80 个波比跳，做完你就懂什么叫"健身竞速"。
+
+HYROX 最妙的地方是什么？它让健身不再只是"举铁 - 拍照 - 发朋友圈"的循环，而是有了明确的目标和竞技性。
+
+这条新闻说明 HYROX 正在全球扩张。从 2017 年第一场 500 人参赛，到 2023 年全球 10 万人参与，这增长速度比我的体重还快。
+
+我个人很看好这个项目。为什么？因为它让"健身"和"比赛"结合，给了普通人一个当运动员的机会。
+
+好了，我要去做波比跳了（开玩笑的，我做不到）。
+
+—— 跨界者 Michael 💪️‍️
                 </div>
             </div>
         </div>
 
+
         <div class="project-section">
-            <div class="project-header tennis">
+            <div class="project-header hyrox-empty">
                 <span>🎾</span>
                 <span>网球</span>
             </div>
-
-            <div class="news-item">
-                <div class="news-title">
-                    <span>Skip to main content</span>
-                    <span class="time-badge">?</span>
-                </div>
-                <div class="news-summary">
-                    
-                </div>
-                <div class="news-highlights">
-                    <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
-                </div>
-                <div class="interaction-box">
-                    <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
-                </div>
-                <a href="https://www.wtatennis.com/news#" class="source-link">阅读原文 →</a>
-            </div>
-
-            <div class="news-item">
-                <div class="news-title">
-                    <span>Go back to the home page</span>
-                    <span class="time-badge">?</span>
-                </div>
-                <div class="news-summary">
-                    
-                </div>
-                <div class="news-highlights">
-                    <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
-                </div>
-                <div class="interaction-box">
-                    <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
-                </div>
-                <a href="https://www.wtatennis.com" class="source-link">阅读原文 →</a>
-            </div>
-
-            <div class="news-item">
-                <div class="news-title">
-                    <span>WTA Tour Calendar</span>
-                    <span class="time-badge">?</span>
-                </div>
-                <div class="news-summary">
-                    
-                </div>
-                <div class="news-highlights">
-                    <h4>🔍 核心看点</h4>
-                    <ul>
-                        <li>暂无详细看点</li>
-                    </ul>
-                </div>
-                <div class="interaction-box">
-                    <h4>💬 互动话题</h4>
-                    <p>• 欢迎评论区讨论</p>
-                </div>
-                <a href="https://www.wtatennis.com/tournaments" class="source-link">阅读原文 →</a>
-            </div>
-
-            <div class="creator-comment">
-                <div class="creator-comment-header">
-                    <div class="creator-avatar">M</div>
-                    <div class="creator-info">
-                        <h4>跨界者 Michael</h4>
-                        <span>每日独家观点</span>
-                    </div>
-                </div>
-                <div class="creator-comment-content">
-                    网球今天的内容很重磅。新生代和老将的对决总是让人期待，你们更看好谁？
-                </div>
+            <div style="padding: 36px 24px; text-align: center; color: #9a9a9a; background: #f5f7f6;">
+                😴 过去 72 小时内没有重要新闻<br>有消息时会第一时间更新
             </div>
         </div>
 
         
         <footer>
             <p><strong>📅 明日预告</strong>：明天同一时间继续更新！</p>
-            <div class="cta-buttons">
-                <a href="#" class="cta-button cta-like">👍 点赞</a>
-                <a href="#" class="cta-button cta-comment">💬 留言</a>
-                <a href="#" class="cta-button cta-wechat">📱 公众号看深度好文</a>
+            <div style="margin-top: 20px;">
+                <a href="#" style="display: inline-block; background: var(--scoreboard-green); color: white; padding: 11px 26px; border-radius: 22px; text-decoration: none; margin: 5px; font-weight: 600;">👍 点赞</a>
+                <a href="#" style="display: inline-block; background: var(--scoreboard-purple); color: white; padding: 11px 26px; border-radius: 22px; text-decoration: none; margin: 5px; font-weight: 600;">💬 留言</a>
             </div>
             <div class="footer-note">
-                <p>
-                    <strong>💡 为什么去公众号？</strong><br>
-                    网页版是每日快讯，公众号会发布更深度内容。
-                </p>
-            </div>
-            <p style="margin-top: 20px; font-size: 12px; color: var(--text-muted);">
                 每日体育精选 | 跨界者 Michael 出品<br>
-                配色：网球比分牌 (#006633 / #663399) · 仅展示过去 24 小时内新闻
-            </p>
+                翻译：googletrans 4.0.0-rc1 (Google Translate)<br>
+                配色：网球比分牌 (#006633 / #663399)
+            </div>
         </footer>
     </div>
     <script>
         function toggleTheme() {
             const html = document.documentElement;
-            const currentTheme = html.getAttribute('data-theme');
-            const btn = document.querySelector('.theme-toggle');
-            const icon = btn.querySelector('.icon');
-            const text = btn.querySelector('.text');
-            if (currentTheme === 'dark') {
-                html.setAttribute('data-theme', 'light');
-                icon.textContent = '☀️';
-                text.textContent = '明色';
-            } else {
-                html.setAttribute('data-theme', 'dark');
-                icon.textContent = '🌙';
-                text.textContent = '暗色';
-            }
+            const icon = document.getElementById('theme-icon');
+            const current = html.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            icon.textContent = newTheme === 'dark' ? '☀️' : '🌙';
         }
     </script>
 </body>
