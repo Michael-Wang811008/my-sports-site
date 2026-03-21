@@ -12,4 +12,4 @@ git commit -m "手动更新体育摘要 %date%"
 git push origin main
 
 :: 5. 任务完成，自动关闭窗口
-exit
+pause
